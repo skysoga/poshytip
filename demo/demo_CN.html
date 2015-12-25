@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh" lang="zh" class="no-js">
+<head>
+<meta charset="UTF-8" />
+	<!-- Tooltip classes -->
+	<link rel="stylesheet" href="../src/tip-yellow/tip-yellow.css" type="text/css" />
+	<link rel="stylesheet" href="../src/tip-violet/tip-violet.css" type="text/css" />
+	<link rel="stylesheet" href="../src/tip-darkgray/tip-darkgray.css" type="text/css" />
+	<link rel="stylesheet" href="../src/tip-skyblue/tip-skyblue.css" type="text/css" />
+	<link rel="stylesheet" href="../src/tip-yellowsimple/tip-yellowsimple.css" type="text/css" />
+	<link rel="stylesheet" href="../src/tip-twitter/tip-twitter.css" type="text/css" />
+	<link rel="stylesheet" href="../src/tip-green/tip-green.css" type="text/css" />
+
+	<!-- jQuery and the Poshy Tip plugin files -->
+	<script type="text/javascript" src="includes/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="../src/jquery.poshytip.js"></script>
+    <script src="./includes/arAnchor.js"></script>
+
+	<!-- Setup examples on this page -->
+	<script type="text/javascript">
+		//<![CDATA[
+		$(function(){
+
+			
+			$('#demo-tip-yellow').poshytip();
+			$('#demo-tip-violet').poshytip({
+				className: 'tip-violet',
+				bgImageFrameSize: 9
+			});
+			$('#demo-tip-darkgray').poshytip({
+				className: 'tip-darkgray',
+				bgImageFrameSize: 11,
+				offsetX: -25
+			});
+			$('#demo-tip-skyblue').poshytip({
+				className: 'tip-skyblue',
+				bgImageFrameSize: 9,
+				offsetX: 0,
+				offsetY: 20
+			});
+			$('#demo-tip-yellowsimple').poshytip({
+				className: 'tip-yellowsimple',
+				showTimeout: 1,
+				alignTo: 'target',
+				alignX: 'center',
+				offsetY: 5,
+				allowTipHover: false
+			});
+			$('#demo-tip-twitter').poshytip({
+				className: 'tip-twitter',
+				showTimeout: 1,
+				alignTo: 'target',
+				alignX: 'center',
+				offsetY: 5,
+				allowTipHover: false,
+				fade: false,
+				slide: false
+			});
+			$('#demo-tip-green').poshytip({
+				className: 'tip-green',
+				offsetX: -7,
+				offsetY: 16,
+				allowTipHover: false
+			});
+			$('#demo-form-name').poshytip({
+				className: 'tip-yellowsimple',
+				showOn: 'focus',
+				alignTo: 'target',
+				alignX: 'right',
+				alignY: 'center',
+				offsetX: 5,
+				showTimeout: 100
+			});
+			$('#demo-form-email').poshytip({
+				className: 'tip-yellowsimple',
+				showOn: 'focus',
+				alignTo: 'target',
+				alignX: 'left',
+				alignY: 'center',
+				offsetX: 5,
+				showTimeout: 100
+			});
+			$('#demo-form-site').poshytip({
+				className: 'tip-yellowsimple',
+				showOn: 'focus',
+				alignTo: 'target',
+				alignX: 'inner-left',
+				offsetX: 0,
+				offsetY: 5,
+				showTimeout: 100
+			});
+			$('#demo-form-subject').poshytip({
+				className: 'tip-yellowsimple',
+				showOn: 'focus',
+				alignTo: 'target',
+				alignX: 'center',
+				alignY: 'bottom',
+				offsetX: 0,
+				offsetY: 5,
+				showTimeout: 100
+			});
+			$('#demo-async-timeout').poshytip({
+				content: function(updateCallback) {
+					window.setTimeout(function() {
+						updateCallback('Tooltip content updated!');
+					}, 1000);
+					return 'Loading...';
+				}
+			});
+
+		
+			$('#demo-follow-cursor').poshytip({
+				followCursor: true,
+				slide: false
+			});
+			$('#demo-manual-trigger').poshytip({
+				content: 'Hey, there! This is a tooltip.',
+				showOn: 'none',
+				alignTo: 'target',
+				alignX: 'inner-left',
+				offsetX: 0,
+				offsetY: 5
+			});
+			$('#button-show').click(function() { $('#demo-manual-trigger').poshytip('show'); });
+			$('#button-show-delayed').click(function() { $('#demo-manual-trigger').poshytip('showDelayed', 2000); });
+			$('#button-hide').click(function() { $('#demo-manual-trigger').poshytip('hide'); });
+			$('#button-hide-delayed').click(function() { $('#demo-manual-trigger').poshytip('hideDelayed', 2000); });
+			$('#button-update').click(function() { $('#demo-manual-trigger').poshytip('update', 'I am a new content :)'); });
+			$('#button-disable').click(function() { $('#demo-manual-trigger').poshytip('disable'); });
+			$('#button-enable').click(function() { $('#demo-manual-trigger').poshytip('enable'); });
+			$('#button-destroy').click(function() { $('#demo-manual-trigger').poshytip('destroy'); });
+			$('#demo-live-events > a').poshytip({
+				liveEvents: true
+			});
+			$('#button-live-events').click(function() {
+				$('#demo-live-events').append(', <a title="Hey, there! This is a tooltip." href="#">Hover for a tooltip</a>');
+			});
+			//初始化
+			$('#demo-personal-card').poshytip({
+				className: 'hover-dropdown-box',
+				cursor: 'cursor',
+				offsetX: -83,
+				content: function(){
+					return showDiv();
+				}	
+			});
+			//返回一个html结构的字符串
+			function showDiv(){
+				var html = '<div class="hover-dropdown-box-wrapper">'+
+					'<div class="user-intro" >'+
+						'<div class="introhead clearfix">'+
+							'<a class="left"><img class="user-photo s4" src="./includes/user-icon.png" alt="头像"></a>'+
+							'<p>马甲</p>'+
+							'<p>001596</p>'+
+							'<p><a>majia@rongji.com</a></p>'+
+						'</div>'+
+						'<div class="intro">感觉萌萌哒……</div>'+
+						'<div class="post-count"><span>关注  231</span><span>粉丝  125</span><span>文章  154</span></div>'+
+						'<a class="follow radius" title="加关注">关注</a>'+
+					'</div>'+
+					'<ul class="push-post small-block-grid-3">'+
+						'<li><a><img src="./includes/pic03.jpg"></a></li>'+
+						'<li><a><img src="./includes/pic05.jpg"></a></li>'+
+						'<li><a>王平和小马回到别墅。小马问了问做饭的朱大姐："他们是不是都去工地了"</a></li>'+
+					'</ul>'+
+				'</div>';
+				return html;
+				}
+			});
+		//]]>
+	</script>
+	<style type="text/css">
+		.flickr-thumbs {
+			overflow:hidden;
+		}
+		.flickr-thumbs a {
+			float:left;
+			display:block;
+			margin:0 3px;
+			border:1px solid #333;
+		}
+		.flickr-thumbs a:hover {
+			border-color:#eee;
+		}
+		.flickr-thumbs img {
+			display:block;
+			width:60px;
+			height:60px;
+		}
+	</style>
+
+
+	<!-- Neglect these files - they are used just to make the demo page prettier -->
+	<link rel="stylesheet" href="includes/demos.css" type="text/css" />
+	<script type="text/javascript" src="includes/sh_main.min.js"></script>
+	<script type="text/javascript" src="includes/demos.js"></script>
+</head>
+
+<body>
+	<div id="holder">
+		
+		<div id="arAnchorBar"></div>
+		
+		<div id="content">
+        <div id="arContent">
+			<h1>poshytip插件</h1>
+			
+			<h2 class="headline-1 arContent-anchor" id="examples">
+            	<span class="arContent-index">1.</span>
+                <span class="arContent-title">概述</span>
+            </h2>
+
+			<p>这个poshytip插件是用jquery封装的用于信息提示的插件。主要功能是取代原有浏览器对title属性值的展现方式， 使得提示内容更加丰富、提示的效果能够自定义以便达到更好的用户体验效果。</p>
+
+			<h2 class="headline-1 arContent-anchor">
+                <span class="arContent-index">2.</span>
+                <span class="arContent-title">使用说明</span>
+             </h2>
+
+			<ul>
+				<li>js依赖：jquery 1.4+</li>
+				<li>兼容性： IE 6+, FF 2+, Opera 9+, Safari 3+, Chrome</li>
+				<li>如果提示的容器是<code>div</code>标签的话，那你依然可以在样式上对其设置<code>max-width</code>和<code>min-width</code>，不必担心它再IE6下会不起作用。</li>
+				<li>让容器div上设置了<code>background-image</code>样式的时候，那脚本就会忽略background-color/padding/border这些样式；且背景图片会自动伸缩来适应提示内容。</li>
+				<li>在IE6下提示容器的背景图片只支持gif格式的，如果设置了png格式的背景图片，那脚本会默认忽略且用background-color/padding/border这些样式来代替。</li>
+			</ul>
+
+			<h2 class="headline-1 arContent-anchor">
+                <span class="arContent-index">3.</span>
+                <span class="arContent-title">资源位置</span>
+             </h2>
+             
+             <ul>
+				<li>下载：<a href="https://github.com/Bulandent/poshytip">https://github.com/Bulandent/poshytip</a></li>
+				<li>官网： <a href="http://vadikom.com/tools/poshy-tip-jquery-plugin-for-stylish-tooltips">http://vadikom.com/tools/poshy-tip-jquery-plugin-for-stylish-tooltips/</a></li>
+			</ul>
+            
+            <h2 class="headline-1 arContent-anchor" id="examples">
+            	<span class="arContent-index">4.</span>
+                <span class="arContent-title">使用示例</span>
+            </h2>
+           	
+            <p>使用示例里包含了下面这几个内容：poshytip官网定义的几款风格展示、不同的位置上来展示提示信息、异步加载提示信息展示、提示跟随鼠标移动、手动的去触发提示、live事件委托的示例展示以及自定义html来显示一个用户名片信息。</p>
+            
+            <h3 class="headline-2 arContent-anchor">
+                <span class="arContent-index">4.1.</span>
+                <span class="arContent-title">不同风格的提示</span>
+            </h3>
+
+			<p>可以使用官网定义好的几款不同风格的提示。定义这些风格的样式和图片放到了src下面的文件夹下。他们分别是tip-darkgray, tip-green, tip-skyblue, tip-twitter, tip-violet, tip-yello, tip-yellowsimple等。</p>
+
+			<!-- #demo-tip-yellow -->
+			<p><a id="demo-tip-yellow" title="Hey, there! This is a tooltip." href="#">.tip-yellow</a></p>
+			<div class="code-block">
+			<pre class="sh_javascript">$('#demo-tip-yellow').poshytip();</pre>
+			</div>
+
+			<!-- #demo-tip-violet -->
+			<p><a id="demo-tip-violet" title="Hey, there! This is a tooltip." href="#">.tip-violet</a></p>
+			<div class="code-block">
+			<pre class="sh_javascript">$('#demo-tip-violet').poshytip({
+	className: 'tip-violet',
+	bgImageFrameSize: 9
+});</pre>
+			</div>
+
+			<!-- #demo-tip-darkgray -->
+			<p><a id="demo-tip-darkgray" title="Hey, there! This is a tooltip." href="#">.tip-darkgray</a></p>
+			<div class="code-block">
+			<pre class="sh_javascript">$('#demo-tip-darkgray').poshytip({
+	className: 'tip-darkgray',
+	bgImageFrameSize: 11,
+	offsetX: -25
+});</pre>
+			</div>
+
+			<!-- #demo-tip-skyblue -->
+			<p><a id="demo-tip-skyblue" title="Hey, there! This is a tooltip." href="#">.tip-skyblue</a></p>
+			<div class="code-block">
+			<pre class="sh_javascript">$('#demo-tip-skyblue').poshytip({
+	className: 'tip-skyblue',
+	bgImageFrameSize: 9,
+	offsetX: 0,
+	offsetY: 20
+});</pre>
+			</div>
+
+			<!-- #demo-tip-yellowsquare -->
+			<p><a id="demo-tip-yellowsimple" title="Hey, there! This is a tooltip." href="#">.tip-yellowsimple</a> </p>
+			<div class="code-block">
+			<pre class="sh_javascript">$('#demo-tip-yellowsimple').poshytip({
+	className: 'tip-yellowsimple',
+	showTimeout: 1,
+	alignTo: 'target',
+	alignX: 'center',
+	offsetY: 5,
+	allowTipHover: false
+});</pre>
+			</div>
+
+			<!-- #demo-tip-twitter -->
+			<p><a id="demo-tip-twitter" title="Follow vadikom" href="#">.tip-twitter</a> </p>
+			<div class="code-block">
+			<pre class="sh_javascript">$('#demo-tip-twitter').poshytip({
+	className: 'tip-twitter',
+	showTimeout: 1,
+	alignTo: 'target',
+	alignX: 'center',
+	offsetY: 5,
+	allowTipHover: false,
+	fade: false,
+	slide: false
+});</pre>
+			</div>
+
+			<!-- #demo-tip-green -->
+			<p><a id="demo-tip-green" title="Hey, there! This is a tooltip." href="#">.tip-green</a></p>
+			<div class="code-block">
+			<pre class="sh_javascript">$('#demo-tip-green').poshytip({
+	className: 'tip-green',
+	offsetX: -7,
+	offsetY: 16,
+	allowTipHover: false
+});</pre>
+			</div>
+
+			 <h3 class="headline-2 arContent-anchor">
+                <span class="arContent-index">4.2.</span>
+                <span class="arContent-title">不同位置的提示</span>
+             </h3>
+
+			<p>poshytip也支持对input的提示，不过需要设置将其触发方式配置为<code>showOn:'focus'</code>，还要配置其对齐方式为相对元素对齐<code>alignTo:'target'</code></p>
+
+			<!-- #demo-form-name -->
+			<p>
+				<label for="demo-form-name">Name:</label><br />
+				<input id="demo-form-name" type="text" size="30" title="Enter your name" />
+			</p>
+			<div class="code-block">
+			<pre class="sh_javascript">$('#demo-form-name').poshytip({
+	className: 'tip-yellowsimple',
+	showOn: 'focus',
+	alignTo: 'target',
+	alignX: 'right',
+	alignY: 'center',
+	offsetX: 5,
+	showTimeout: 100
+});</pre>
+			</div>
+
+			<!-- #demo-form-email -->
+			<p>
+				<label for="demo-form-email">Email:</label><br />
+				<input id="demo-form-email" type="text" size="30" title="Enter a valid email" />
+			</p>
+			<div class="code-block">
+			<pre class="sh_javascript">$('#demo-form-email').poshytip({
+	className: 'tip-yellowsimple',
+	showOn: 'focus',
+	alignTo: 'target',
+	alignX: 'left',
+	alignY: 'center',
+	offsetX: 5,
+	showTimeout: 100
+});</pre>
+			</div>
+
+			<!-- #demo-form-site -->
+			<p>
+				<label for="demo-form-site">Site:</label><br />
+				<input id="demo-form-site" type="text" size="30" title="Enter your website URL" />
+			</p>
+			<div class="code-block">
+			<pre class="sh_javascript">$('#demo-form-site').poshytip({
+	className: 'tip-yellowsimple',
+	showOn: 'focus',
+	alignTo: 'target',
+	alignX: 'inner-left',
+	offsetX: 0,
+	offsetY: 5,
+	showTimeout: 100
+});</pre>
+			</div>
+
+			<!-- #demo-form-subject -->
+			<p>
+				<label for="demo-form-subject">Subject:</label><br />
+				<input id="demo-form-subject" type="text" size="30" title="Enter a subject" />
+			</p>
+			<div class="code-block">
+			<pre class="sh_javascript">$('#demo-form-subject').poshytip({
+	className: 'tip-yellowsimple',
+	showOn: 'focus',
+	alignTo: 'target',
+	alignX: 'center',
+	alignY: 'bottom',
+	offsetX: 0,
+	offsetY: 5,
+	showTimeout: 100
+});</pre>
+			</div>
+
+			<h3 class="headline-2 arContent-anchor">
+                <span class="arContent-index">4.3.</span>
+                <span class="arContent-title">异步加载提示内容</span>
+             </h3>
+
+			<p>poshytip支持使用一个函数来返回提示内容和也可以将更新的回调函数作为一个参数传递给这个函数。通过使用这个回调，可以很容易地用异步加载来的提示信息去更新已经显示的提示。</p>
+
+			<!-- #demo-async-timeout -->
+			<p><a id="demo-async-timeout" href="#">1秒后更新提示内容</a></p>
+			<div class="code-block">
+			<pre class="sh_javascript">$('#demo-async-timeout').poshytip({
+	content: function(updateCallback) {
+		window.setTimeout(function() {
+			updateCallback('Tooltip content updated!');
+		}, 1000);
+		return 'Loading...';
+	}
+});</pre>
+			</div>
+	
+    		<h3 class="headline-2 arContent-anchor">
+                <span class="arContent-index">4.4.</span>
+                <span class="arContent-title">跟随着鼠标移动</span>
+             </h3>
+
+			<p>如果配置了<code>followCursor: true</code>参数,就可以实现让提示信息随着鼠标的移动而移动。为了更好的看到这个效果最好也配置下<code>slide: false</code>)</p>
+
+			<!-- #demo-follow-cursor -->
+			<p><a id="demo-follow-cursor" title="Hey, there! This is a tooltip." href="#">Hover for a tooltip that follows the cursor</a></p>
+			<div class="code-block">
+			<pre class="sh_javascript">$('#demo-follow-cursor').poshytip({
+	followCursor: true,
+	slide: false
+});</pre>
+			</div>
+			
+            <h3 class="headline-2 arContent-anchor">
+                <span class="arContent-index">4.5.</span>
+                <span class="arContent-title">手动触发提示</span>
+             </h3>
+
+			<p>你也可以通过poshytip的接口方法去手动的触发提示，这么做的前提是需要设置参数<code>showOn: 'none'</code> </p>
+
+			<!-- #demo-manual-trigger -->
+			<p><a id="demo-manual-trigger" href="#">This link has a tooltip that is not triggered automatically</a></p>
+			<p><button id="button-show">显示</button> <button id="button-show-delayed">2秒后显示</button> <button id="button-hide">隐藏</button> <button id="button-hide-delayed">2秒后隐藏</button> <button id="button-update">更新提示</button> <button id="button-disable">禁用提示</button> <button id="button-enable">开启提示</button> <button id="button-destroy">销毁提示</button></p>
+			<div class="code-block">
+			<pre class="sh_javascript">$('#demo-manual-trigger').poshytip({
+	content: 'Hey, there! This is a tooltip.',
+	showOn: 'none',
+	alignTo: 'target',
+	alignX: 'inner-left',
+	offsetX: 0,
+	offsetY: 5
+});
+$('#button-show').click(function() { $('#demo-manual-trigger').poshytip('show'); });
+$('#button-show-delayed').click(function() { $('#demo-manual-trigger').poshytip('showDelayed', 2000); });
+$('#button-hide').click(function() { $('#demo-manual-trigger').poshytip('hide'); });
+$('#button-hide-delayed').click(function() { $('#demo-manual-trigger').poshytip('hideDelayed', 2000); });
+$('#button-update').click(function() { $('#demo-manual-trigger').poshytip('update', 'I am a new content :)'); });
+$('#button-disable').click(function() { $('#demo-manual-trigger').poshytip('disable'); });
+$('#button-enable').click(function() { $('#demo-manual-trigger').poshytip('enable'); });
+$('#button-destroy').click(function() { $('#demo-manual-trigger').poshytip('destroy'); });</pre>
+			</div>
+
+			<h3 class="headline-2 arContent-anchor">
+                <span class="arContent-index">4.6.</span>
+                <span class="arContent-title">使用事件委派</span>
+             </h3>
+
+			<p>通过配置<code>liveEvents:true</code>参数就可以启用事件委派功能。事件委派只有在支持live事件绑定的jquery中才可以生效。</p>
+
+			<!-- #demo-live-events -->
+			<p id="demo-live-events"><a title="Hey, there! This is a tooltip." href="#">Hover for a tooltip</a></p>
+			<p><button id="button-live-events">增加一个链接</button></p>
+			<div class="code-block">
+			<pre class="sh_javascript">$('#demo-live-events &gt; a').poshytip({
+	liveEvents: true
+});
+$('#button-live-events').click(function() {
+	$('#demo-live-events').append(', &lt;a title="Hey, there! This is a tooltip." href="#"&gt;Hover for a tooltip&lt;/a&gt;');
+});</pre>
+			</div>
+            
+            <h3 class="headline-2 arContent-anchor">
+                <span class="arContent-index">4.7.</span>
+                <span class="arContent-title">自定义html</span>
+            </h3>
+            
+            <p>这里使用content调用一个方法，返回一段自定义的html来达到显示用户名片的效果。</p>
+
+			<!-- #demo-live-events -->
+			<p id="demo-personal-card"><img src="./includes/user-icon.png" style="cursor:pointer;"/></p>
+			<div class="code-block">
+			<pre class="sh_javascript">$('#demo-personal-card').poshytip({
+    className: 'hover-dropdown-box',
+    cursor: 'cursor',
+    offsetX: -83,
+    content: function(){
+        return showDiv();
+    }	
+});
+//返回一个html结构的字符串
+function showDiv(){
+    var html = 'html结构这里省略了，详情可以在本页面源码里看到';
+    return html;
+    }
+});</pre>
+			</div>
+
+			<h2 class="headline-1 arContent-anchor">
+                <span class="arContent-index">5.</span>
+                <span class="arContent-title">参数列表</span>
+             </h2>
+
+			<dl class="options">
+				<dt><strong>content</strong> <i>String, DOM element, Function, jQuery</i></dt>
+				<dd><div class="possible-values">Possible Values: <span>'[title]', 'string', element, function(updateCallback){...}, jQuery</span></div>提示的内容</dd>
+
+				<dt><strong>className</strong> <i>String</i></dt>
+				<dd>提示的样式名</dd>
+
+				<dt><strong>idName</strong> <i>String</i></dt>
+				<dd>提示的id</dd>
+
+				<dt><strong>bgImageFrameSize</strong> <i>Number</i></dt>
+				<dd>背景图片的尺寸</dd>
+
+				<dt><strong>showTimeout</strong> <i>Number</i></dt>
+				<dd>显示延迟时间，单位是毫秒</dd>
+
+				<dt><strong>hideTimeout</strong> <i>Number</i></dt>
+				<dd>隐藏延迟时间，单位是毫秒</dd>
+
+				<dt><strong>timeOnScreen</strong> <i>Number</i></dt>
+				<dd>提示自动隐藏后还需要多久才能显示</dd>
+
+				<dt><strong>showOn</strong> <i>String</i></dt>
+				<dd><div class="possible-values">可能的值: <span>'hover', 'focus', 'none'</span></div>提示的触发方式。设置为 <code>'none'</code>的时候，你可以手动去触发提示；<code>'hover'</code>当鼠标悬停的时候触发；<code>'focus'</code>当获取焦点的时候触发</dd>
+
+				<dt><strong>liveEvents</strong> <i>Boolean</i></dt>
+				<dd>使用事件委托<br /><br />这个参数只有在支持live事件绑定的jquery中才生效。</dd>
+
+				<dt><strong>alignTo</strong> <i>String</i></dt>
+				<dd><div class="possible-values">可能的值: <span>'cursor', 'target'</span></div><code>'cursor'</code>提示相对鼠标对齐；<code>'target'</code>提示相对元素对齐</dd>
+
+				<dt><strong>alignX</strong> <i>String</i></dt>
+				<dd><div class="possible-values">可能的值: <span>'right', 'center', 'left', 'inner-left', 'inner-right'</span></div>水平方向的对齐方向。<code>'left'</code>和<code>'right'</code>相对<code>alignTo:'cursor'</code>而言； 而<code>'inner-'</code>则是相对<code>alignTo:'target'</code>而言</dd>
+
+				<dt><strong>alignY</strong> <i>String</i></dt>
+				<dd><div class="possible-values">可能的值: <span>'bottom', 'center', 'top', 'inner-bottom', 'inner-top'</span></div>垂直方向上的对齐方向</dd>
+
+				<dt><strong>offsetX</strong> <i>Number</i></dt>
+				<dd>水平方向上的偏移量；当设置<code>alignX:'center'</code>时失效</dd>
+
+				<dt><strong>offsetY</strong> <i>Number</i></dt>
+				<dd>垂直方向上的偏移量； 当设置<code>alignY:'center'</code>时失效</dd>
+
+				<dt><strong>keepInViewport</strong> <i>Boolean</i></dt>
+				<dd>是否让提示显示在可视范围</dd>
+
+				<dt><strong>allowTipHover</strong> <i>Boolean</i></dt>
+				<dd>当鼠标移开target的时候如果提示还没有隐藏，则是否可以将鼠标悬停到提示内容中 - 仅仅当设置了<code>showOn:'hover'</code>参数是生效</dd>
+
+				<dt><strong>followCursor</strong> <i>Boolean</i></dt>
+				<dd>提示是否随着鼠标移动而移动 - 仅仅当设置了<code>showOn:'hover'</code>和<code>alignTo:'cursor'</code>参数时才生效</dd>
+
+				<dt><strong>fade</strong> <i>Boolean</i></dt>
+				<dd>是否启用fade动画</dd>
+
+				<dt><strong>slide</strong> <i>Boolean</i></dt>
+				<dd>是否启用slide动画</dd>
+
+				<dt><strong>slideOffset</strong> <i>Number</i></dt>
+				<dd>slide动画偏移量</dd>
+
+				<dt><strong>showAniDuration</strong> <i>Number</i></dt>
+				<dd>显示动画时的过渡时间</dd>
+
+				<dt><strong>hideAniDuration</strong> <i>Number</i></dt>
+				<dd>隐藏动画时的过渡时间</dd>
+
+				<dt><strong>refreshAniDuration</strong> <i>Number</i></dt>
+				<dd>当异步的更新提示内容的时候的动画过渡时间</dd>
+			</dl>
+
+			<h2 class="headline-1 arContent-anchor">
+                <span class="arContent-index">6.</span>
+                <span class="arContent-title">方法列表</span>
+             </h2>
+
+			<dl class="options">
+				<dt><strong>.poshytip('show')</strong></dt>
+				<dd>显示提示。为了让触发更好的执行，你可以设置<code>alignTo:'target'</code></dd>
+
+				<dt><strong>.poshytip('showDelayed', [ timeout ] )</strong></dt>
+				<dd>延迟显示提示。<code>timeout</code>参数是延迟显示的毫秒数，不传递该参数的话会使用默认的<code>showTimeout</code>的值：500毫秒</dd>
+
+				<dt><strong>.poshytip('hide')</strong></dt>
+				<dd>隐藏提示</dd>
+
+				<dt><strong>.poshytip('hideDelayed', [ timeout ] )</strong></dt>
+				<dd>延迟隐藏提示。<code>timeout</code>参数是延迟y隐藏毫秒数，不传递该参数的话会使用默认的<code>hideTimeout</code>的值：100毫秒</dd>
+
+				<dt><strong>$.Poshytip.hideAll()</strong></dt>
+				<dd>隐藏页面上所有的poshytip</dd>
+
+				<dt><strong>.poshytip('update', content, [ dontOverwriteOption ] )</strong></dt>
+				<dd>更新提示内容<div class="signature"><strong>content</strong> '[title]', 'string', element, function(updateCallback){...}, jQuery<br /><strong>dontOverwriteOption</strong> (optional) boolean <br />如果设置为true则当提示显示的时候才会去更新提示内容，且当再次显示提示的时候还是原来的内容；false则是任何时候都可以更新，切更新内容不会被原来的替换。</dd>
+
+				<dt><strong>.poshytip('disable')</strong></dt>
+				<dd>禁用提示</dd>
+
+				<dt><strong>.poshytip('enable')</strong></dt>
+				<dd>启用提示</dd>
+
+				<dt><strong>.poshytip('destroy')</strong></dt>
+				<dd>完全销毁提示</dd>
+			</dl>
+
+		</div>
+		</div>
+	</div>
+
+</body>
+</html>
