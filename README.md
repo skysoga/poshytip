@@ -6,8 +6,8 @@
 ### 2. 使用说明
 - js依赖：jquery 1.4+
 - 兼容性：IE 6+, FF 2+, Opera 9+, Safari 3+, Chrome
-- 如果提示的容器是div标签的话，那你依然可以在样式上对其设置max-width和min-width，不必担心它再IE6下会不起作用。
-- 让容器div上设置了background-image样式的时候，那脚本就会忽略background-color/padding/border这些样式；且背景图片会自动伸缩来适应提示内容。
+- 如果提示的容器是div标签的话，那你依然可以在样式上对其设置max-width和min-width，不必担心它在IE6下会不起作用。
+- 在div容器上设置了background-image样式的时候，那脚本就会忽略background-color/padding/border这些样式；且背景图片会自动伸缩来适应提示内容。
 - 在IE6下提示容器的背景图片只支持gif格式的，如果设置了png格式的背景图片，那脚本会默认忽略且用background-color/padding/border这些样式来代替。
 
 ### 3. 资源位置
