@@ -508,6 +508,9 @@ pre.sh_sourceCode .sh_value {
 	position: relative;
 	margin: 20px 0 0 20px;
 	visibility:hidden;
+	_position:absolute;
+	_top:expression(eval(document.documentElement.scrollTop + 200));
+	_left:1000px;
 }
 .arCatalog .arCatalog-line {
 	top: 12px;

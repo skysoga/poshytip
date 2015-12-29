@@ -74,11 +74,11 @@ $(function(){
 		}
         
         if (isIE6()) {
-			if(bH < 0){
+			/*if(bH < 0){
 				$arCatalog.css('top', ot - sHeight() > 0 ? Math.abs(sHeight() - ot) + (cHeight() - Math.abs(sHeight() - ot) - $arCatalog.height())/2 - 20 + sHeight() : (cHeight() - $arCatalog.height())/2 + sHeight()); 
 			}else{
 				$arCatalog.css('top',(cHeight() - bH - $arCatalog.height())/2 + sHeight());
-			}
+			}*/
 		} else {
 			 if(bH < 0){
 				$arCatalog.css('top', ot - sHeight() > 0 ? Math.abs(sHeight() - ot) + (cHeight() - Math.abs(sHeight() - ot) - $arCatalog.height())/2 - 20  : (cHeight() - $arCatalog.height())/2 ); 
